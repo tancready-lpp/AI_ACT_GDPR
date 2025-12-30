@@ -1,0 +1,817 @@
+{
+  "nodes": [
+    {
+      "id": "root",
+      "label": "Quadro Normativo UE Digitale",
+      "group": "core",
+      "level": 0,
+      "risk": 0.1,
+      "details": "Armonizzazione tra la tutela dei diritti fondamentali (GDPR) e la sicurezza dei prodotti IA (AI Act).",
+      "citations": [
+        "GUUE L 119/1",
+        "GUUE L 144/1"
+      ],
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Regolamento (UE) 2016/679",
+            "text": "Testo completo del GDPR.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": [
+          {
+            "title": "Regolamento (UE) 2024/1689",
+            "text": "Testo completo dell'AI Act.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "aiact",
+      "label": "AI Act (2024/1689)",
+      "group": "aiact",
+      "level": 1,
+      "risk": 0.2,
+      "details": "Regolamento basato sul rischio per l'IA.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Considerando 14",
+            "text": "Obiettivi del regolamento: mercato interno e diritti fondamentali.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gdpr",
+      "label": "GDPR (2016/679)",
+      "group": "gdpr",
+      "level": 1,
+      "risk": 0.2,
+      "details": "Regolamento generale sulla protezione dei dati.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 1",
+            "text": "Oggetto e finalità.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "governance",
+      "label": "Governance & Vigilanza",
+      "group": "gov",
+      "level": 1,
+      "risk": 0.3,
+      "details": "Sistema di supervisione integrato.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Capo VI",
+            "text": "Autorità di controllo indipendenti.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": [
+          {
+            "title": "Titolo VII",
+            "text": "Governance dell'IA.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "prohibited",
+      "label": "Pratiche Vietate (Art. 5)",
+      "group": "aiact",
+      "level": 2,
+      "risk": 1,
+      "keywords": [
+        "ban"
+      ],
+      "details": "Divieto per rischi inaccettabili.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 5",
+            "text": "Pratiche di IA vietate.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ban_social",
+      "label": "Social Scoring",
+      "group": "aiact",
+      "level": 3,
+      "risk": 1,
+      "keywords": [
+        "social_scoring"
+      ],
+      "details": "Divieto di valutare l'affidabilità sociale da parte delle autorità pubbliche.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 5, Par. 1, lett. c)",
+            "text": "Divieto di valutazione o classificazione delle persone fisiche (social scoring).",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ban_biometric",
+      "label": "Biometria Real-Time",
+      "group": "aiact",
+      "level": 3,
+      "risk": 1,
+      "keywords": [
+        "biometria",
+        "sorveglianza"
+      ],
+      "details": "Divieto di identificazione biometrica remota in tempo reale in spazi pubblici (salvo reati gravi).",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 5, Par. 1, lett. h)",
+            "text": "Uso di sistemi di identificazione biometrica remota in tempo reale in spazi accessibili al pubblico a fini di contrasto.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ban_manipulation",
+      "label": "Tecniche Manipolative",
+      "group": "aiact",
+      "level": 3,
+      "risk": 1,
+      "keywords": [
+        "dark_pattern",
+        "subliminale"
+      ],
+      "details": "Divieto di tecniche subliminali che alterano il comportamento.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 5, Par. 1, lett. a)",
+            "text": "Tecniche subliminali che agiscono senza che la persona ne sia consapevole.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "high_risk",
+      "label": "Alto Rischio (Art. 6)",
+      "group": "aiact",
+      "level": 2,
+      "risk": 0.8,
+      "keywords": [
+        "compliance"
+      ],
+      "details": "Sistemi che richiedono rigorosa conformità.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 6",
+            "text": "Classificazione regole alto rischio.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hr_infra",
+      "label": "Infrastrutture Critiche",
+      "group": "aiact",
+      "level": 3,
+      "risk": 0.8,
+      "keywords": [
+        "energia",
+        "trasporti"
+      ],
+      "details": "Gestione traffico, forniture acqua/gas/elettricità.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Allegato III, Punto 2",
+            "text": "Gestione e funzionamento delle infrastrutture digitali critiche, traffico stradale, approvvigionamento idrico, gas, riscaldamento ed elettricità.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hr_employment",
+      "label": "HR & Selezione",
+      "group": "aiact",
+      "level": 3,
+      "risk": 0.8,
+      "keywords": [
+        "lavoro",
+        "recruiting"
+      ],
+      "details": "Software per screening CV e valutazione dipendenti.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Allegato III, Punto 4",
+            "text": "Occupazione, gestione dei lavoratori e accesso al lavoro autonomo.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hr_justice",
+      "label": "Giustizia & Legge",
+      "group": "aiact",
+      "level": 3,
+      "risk": 0.8,
+      "keywords": [
+        "polizia",
+        "giudici"
+      ],
+      "details": "Valutazione rischio recidiva, affidabilità prove.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Allegato III, Punto 6",
+            "text": "Autorità di contrasto (Law Enforcement).",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ce_marking",
+      "label": "Marcatura CE",
+      "group": "aiact",
+      "level": 3,
+      "risk": 0.7,
+      "keywords": [
+        "conformità"
+      ],
+      "details": "Obbligo di marcatura CE per sistemi High Risk.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 48",
+            "text": "Marcatura CE di conformità.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gpai",
+      "label": "GPAI & GenAI",
+      "group": "aiact",
+      "level": 2,
+      "risk": 0.5,
+      "keywords": [
+        "llm",
+        "generative"
+      ],
+      "details": "Modelli di IA per finalità generali (es. GPT).",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 51",
+            "text": "Regole per modelli GPAI.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "copyright",
+      "label": "Copyright",
+      "group": "aiact",
+      "level": 3,
+      "risk": 0.4,
+      "keywords": [
+        "diritto_autore"
+      ],
+      "details": "Rispetto norme UE sul diritto d'autore nell'addestramento.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 53, Par. 1, lett. c)",
+            "text": "I fornitori di modelli GPAI devono mettere in atto una politica per rispettare la normativa dell'Unione sul diritto d'autore.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "transparency",
+      "label": "Trasparenza (Art. 50)",
+      "group": "aiact",
+      "level": 2,
+      "risk": 0.3,
+      "keywords": [
+        "chatbot",
+        "deepfake"
+      ],
+      "details": "Obbligo di rivelare interazione con macchina.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 50",
+            "text": "Obblighi di trasparenza per fornitori e deployer.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sandbox",
+      "label": "Sandbox Normative",
+      "group": "aiact",
+      "level": 3,
+      "risk": 0.1,
+      "keywords": [
+        "innovazione"
+      ],
+      "details": "Ambienti controllati per testare l'IA prima del mercato.",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 57",
+            "text": "Sandbox normative per l'IA.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "principles",
+      "label": "Principi (Art. 5)",
+      "group": "gdpr",
+      "level": 2,
+      "risk": 0.4,
+      "details": "Fondamenta del trattamento dati.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 5",
+            "text": "Principi applicabili al trattamento.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "minimization",
+      "label": "Minimizzazione",
+      "group": "gdpr",
+      "level": 3,
+      "risk": 0.4,
+      "keywords": [
+        "data_minimization"
+      ],
+      "details": "Usare solo i dati strettamente necessari.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 5, Par. 1, lett. c)",
+            "text": "Adeguati, pertinenti e limitati a quanto necessario rispetto alle finalità.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "privacy_design",
+      "label": "Privacy by Design",
+      "group": "gdpr",
+      "level": 3,
+      "risk": 0.5,
+      "keywords": [
+        "art25"
+      ],
+      "details": "Protezione dati integrata fin dalla progettazione (Art. 25).",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 25",
+            "text": "Protezione dei dati fin dalla progettazione e protezione per impostazione predefinita.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "consent",
+      "label": "Consenso (Art. 7)",
+      "group": "gdpr",
+      "level": 3,
+      "risk": 0.6,
+      "keywords": [
+        "consenso"
+      ],
+      "details": "Deve essere libero, specifico, informato e inequivocabile.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 7",
+            "text": "Condizioni per il consenso.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "rights",
+      "label": "Diritti Interessati",
+      "group": "gdpr",
+      "level": 2,
+      "risk": 0.3,
+      "details": "Capo III del GDPR.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Capo III",
+            "text": "Diritti dell'interessato.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "access",
+      "label": "Accesso",
+      "group": "gdpr",
+      "level": 3,
+      "risk": 0.2,
+      "keywords": [
+        "accesso"
+      ],
+      "details": "Diritto di sapere se i dati sono trattati.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 15",
+            "text": "Diritto di accesso dell'interessato.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "erasure",
+      "label": "Diritto all'Oblio",
+      "group": "gdpr",
+      "level": 3,
+      "risk": 0.3,
+      "keywords": [
+        "cancellazione"
+      ],
+      "details": "Cancellazione dati se non più necessari (Art. 17).",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 17",
+            "text": "Diritto alla cancellazione («diritto all'oblio»).",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "art22",
+      "label": "No Automated Decision",
+      "group": "gdpr",
+      "level": 3,
+      "risk": 0.7,
+      "keywords": [
+        "decisioni_automatizzate"
+      ],
+      "details": "Art. 22: Diritto di non subire decisioni solo algoritmiche.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 22",
+            "text": "Processo decisionale automatizzato relativo alle persone fisiche, compresa la profilazione.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "accountability",
+      "label": "Accountability",
+      "group": "gdpr",
+      "level": 2,
+      "risk": 0.5,
+      "details": "Responsabilizzazione del titolare.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 24",
+            "text": "Responsabilità del titolare.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "dpia",
+      "label": "DPIA (Art. 35)",
+      "group": "gdpr",
+      "level": 3,
+      "risk": 0.6,
+      "keywords": [
+        "impatto"
+      ],
+      "details": "Valutazione d'impatto obbligatoria per rischi elevati.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 35",
+            "text": "Valutazione d'impatto sulla protezione dei dati.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "breach",
+      "label": "Data Breach",
+      "group": "gdpr",
+      "level": 3,
+      "risk": 0.9,
+      "keywords": [
+        "notifica"
+      ],
+      "details": "Notifica violazioni entro 72 ore (Art. 33).",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 33",
+            "text": "Notifica di una violazione dei dati personali all'autorità di controllo.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "dpo",
+      "label": "DPO",
+      "group": "gdpr",
+      "level": 3,
+      "risk": 0.2,
+      "keywords": [
+        "rpd"
+      ],
+      "details": "Responsabile della Protezione dei Dati.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 37",
+            "text": "Designazione del responsabile della protezione dei dati.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": []
+      }
+    },
+    {
+      "id": "fria",
+      "label": "FRIA",
+      "group": "gov",
+      "level": 2,
+      "risk": 0.6,
+      "details": "Fundamental Rights Impact Assessment (AI Act Art. 27).",
+      "legal_texts": {
+        "gdpr": [],
+        "aiact": [
+          {
+            "title": "Art. 27",
+            "text": "Valutazione dell'impatto sui diritti fondamentali.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fines",
+      "label": "Sanzioni",
+      "group": "gov",
+      "level": 2,
+      "risk": 0.9,
+      "details": "Multe fino al 7% del fatturato (AI Act) o 4% (GDPR).",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 83",
+            "text": "Condizioni generali per infliggere sanzioni amministrative pecuniarie.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": [
+          {
+            "title": "Art. 99",
+            "text": "Sanzioni.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    },
+    {
+      "id": "authorities",
+      "label": "Autorità",
+      "group": "gov",
+      "level": 2,
+      "risk": 0.2,
+      "details": "Garante Privacy & AI Office.",
+      "legal_texts": {
+        "gdpr": [
+          {
+            "title": "Art. 51",
+            "text": "Autorità di controllo.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32016R0679"
+          }
+        ],
+        "aiact": [
+          {
+            "title": "Art. 63",
+            "text": "Ufficio per l'IA.",
+            "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32024R1689"
+          }
+        ]
+      }
+    }
+  ],
+  "links": [
+    {
+      "source": "root",
+      "target": "aiact"
+    },
+    {
+      "source": "root",
+      "target": "gdpr"
+    },
+    {
+      "source": "root",
+      "target": "governance"
+    },
+    {
+      "source": "aiact",
+      "target": "prohibited"
+    },
+    {
+      "source": "prohibited",
+      "target": "ban_social"
+    },
+    {
+      "source": "prohibited",
+      "target": "ban_biometric"
+    },
+    {
+      "source": "prohibited",
+      "target": "ban_manipulation"
+    },
+    {
+      "source": "aiact",
+      "target": "high_risk"
+    },
+    {
+      "source": "high_risk",
+      "target": "hr_infra"
+    },
+    {
+      "source": "high_risk",
+      "target": "hr_employment"
+    },
+    {
+      "source": "high_risk",
+      "target": "hr_justice"
+    },
+    {
+      "source": "high_risk",
+      "target": "ce_marking"
+    },
+    {
+      "source": "aiact",
+      "target": "gpai"
+    },
+    {
+      "source": "gpai",
+      "target": "copyright"
+    },
+    {
+      "source": "aiact",
+      "target": "transparency"
+    },
+    {
+      "source": "transparency",
+      "target": "sandbox"
+    },
+    {
+      "source": "gdpr",
+      "target": "principles"
+    },
+    {
+      "source": "principles",
+      "target": "minimization"
+    },
+    {
+      "source": "principles",
+      "target": "privacy_design"
+    },
+    {
+      "source": "principles",
+      "target": "consent"
+    },
+    {
+      "source": "gdpr",
+      "target": "rights"
+    },
+    {
+      "source": "rights",
+      "target": "access"
+    },
+    {
+      "source": "rights",
+      "target": "erasure"
+    },
+    {
+      "source": "rights",
+      "target": "art22"
+    },
+    {
+      "source": "gdpr",
+      "target": "accountability"
+    },
+    {
+      "source": "accountability",
+      "target": "dpia"
+    },
+    {
+      "source": "accountability",
+      "target": "breach"
+    },
+    {
+      "source": "accountability",
+      "target": "dpo"
+    },
+    {
+      "source": "governance",
+      "target": "fria"
+    },
+    {
+      "source": "governance",
+      "target": "fines"
+    },
+    {
+      "source": "governance",
+      "target": "authorities"
+    },
+    {
+      "source": "art22",
+      "target": "high_risk",
+      "type": "correlation"
+    },
+    {
+      "source": "dpia",
+      "target": "fria",
+      "type": "correlation"
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa Interattiva Quadro Normativo UE Digitale</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.26.0/cytoscape.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f4f7f9;
+        }
+        #cy {
+            flex-grow: 1;
+            height: 100%;
+        }
+        #info-panel {
+            width: 400px;
+            background: white;
+            border-left: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            display: none;
+        }
+        h2 { color: #2c3e50; margin-top: 0; }
+        .risk-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .legal-link {
+            display: block;
+            margin: 5px 0;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .legal-link:hover { text-decoration: underline; }
+        .section-title { font-weight: bold; margin-top: 15px; border-bottom: 1px solid #eee; }
+        .placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #7f8c8d;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="cy"></div>
+
+<div id="info-panel">
+    <div id="node-content">
+        </div>
+</div>
+
+<script>
+// I tuoi dati JSON caricati direttamente
+const jsonData = {
+  "nodes": [
+    { "id": "root", "label": "Quadro Normativo UE Digitale", "group": "core", "level": 0, "risk": 0.1, "details": "Armonizzazione tra la tutela dei diritti fondamentali (GDPR) e la sicurezza dei prodotti IA (AI Act)." },
+    { "id": "aiact", "label": "AI Act (2024/1689)", "group": "aiact", "level": 1, "risk": 0.2, "details": "Regolamento basato sul rischio per l'IA." },
+    { "id": "gdpr", "label": "GDPR (2016/679)", "group": "gdpr", "level": 1, "risk": 0.2, "details": "Regolamento generale sulla protezione dei dati." },
+    { "id": "governance", "label": "Governance & Vigilanza", "group": "gov", "level": 1, "risk": 0.3, "details": "Sistema di supervisione integrato." },
+    { "id": "prohibited", "label": "Pratiche Vietate (Art. 5)", "group": "aiact", "level": 2, "risk": 1, "details": "Divieto per rischi inaccettabili." },
+    { "id": "ban_social", "label": "Social Scoring", "group": "aiact", "level": 3, "risk": 1, "details": "Divieto di valutare l'affidabilità sociale da parte delle autorità pubbliche." },
+    { "id": "ban_biometric", "label": "Biometria Real-Time", "group": "aiact", "level": 3, "risk": 1, "details": "Divieto di identificazione biometrica remota in tempo reale in spazi pubblici." },
+    { "id": "ban_manipulation", "label": "Tecniche Manipolative", "group": "aiact", "level": 3, "risk": 1, "details": "Divieto di tecniche subliminali che alterano il comportamento." },
+    { "id": "high_risk", "label": "Alto Rischio (Art. 6)", "group": "aiact", "level": 2, "risk": 0.8, "details": "Sistemi che richiedono rigorosa conformità." },
+    { "id": "hr_infra", "label": "Infrastrutture Critiche", "group": "aiact", "level": 3, "risk": 0.8, "details": "Gestione traffico, forniture acqua/gas/elettricità." },
+    { "id": "hr_employment", "label": "HR & Selezione", "group": "aiact", "level": 3, "risk": 0.8, "details": "Software per screening CV e valutazione dipendenti." },
+    { "id": "hr_justice", "label": "Giustizia & Legge", "group": "aiact", "level": 3, "risk": 0.8, "details": "Valutazione rischio recidiva, affidabilità prove." },
+    { "id": "ce_marking", "label": "Marcatura CE", "group": "aiact", "level": 3, "risk": 0.7, "details": "Obbligo di marcatura CE per sistemi High Risk." },
+    { "id": "gpai", "label": "GPAI & GenAI", "group": "aiact", "level": 2, "risk": 0.5, "details": "Modelli di IA per finalità generali (es. GPT)." },
+    { "id": "copyright", "label": "Copyright", "group": "aiact", "level": 3, "risk": 0.4, "details": "Rispetto norme UE sul diritto d'autore nell'addestramento." },
+    { "id": "transparency", "label": "Trasparenza (Art. 50)", "group": "aiact", "level": 2, "risk": 0.3, "details": "Obbligo di rivelare interazione con macchina." },
+    { "id": "sandbox", "label": "Sandbox Normative", "group": "aiact", "level": 3, "risk": 0.1, "details": "Ambienti controllati per testare l'IA." },
+    { "id": "principles", "label": "Principi (Art. 5)", "group": "gdpr", "level": 2, "risk": 0.4, "details": "Fondamenta del trattamento dati." },
+    { "id": "minimization", "label": "Minimizzazione", "group": "gdpr", "level": 3, "risk": 0.4, "details": "Usare solo i dati strettamente necessari." },
+    { "id": "privacy_design", "label": "Privacy by Design", "group": "gdpr", "level": 3, "risk": 0.5, "details": "Protezione dati integrata fin dalla progettazione." },
+    { "id": "consent", "label": "Consenso (Art. 7)", "group": "gdpr", "level": 3, "risk": 0.6, "details": "Deve essere libero, specifico e informato." },
+    { "id": "rights", "label": "Diritti Interessati", "group": "gdpr", "level": 2, "risk": 0.3, "details": "Capo III del GDPR." },
+    { "id": "access", "label": "Accesso", "group": "gdpr", "level": 3, "risk": 0.2, "details": "Diritto di sapere se i dati sono trattati." },
+    { "id": "erasure", "label": "Diritto all'Oblio", "group": "gdpr", "level": 3, "risk": 0.3, "details": "Cancellazione dati (Art. 17)." },
+    { "id": "art22", "label": "No Automated Decision", "group": "gdpr", "level": 3, "risk": 0.7, "details": "Diritto di non subire decisioni solo algoritmiche." },
+    { "id": "accountability", "label": "Accountability", "group": "gdpr", "level": 2, "risk": 0.5, "details": "Responsabilizzazione del titolare." },
+    { "id": "dpia", "label": "DPIA (Art. 35)", "group": "gdpr", "level": 3, "risk": 0.6, "details": "Valutazione d'impatto obbligatoria." },
+    { "id": "breach", "label": "Data Breach", "group": "gdpr", "level": 3, "risk": 0.9, "details": "Notifica violazioni entro 72 ore." },
+    { "id": "dpo", "label": "DPO", "group": "gdpr", "level": 3, "risk": 0.2, "details": "Responsabile della Protezione dei Dati." },
+    { "id": "fria", "label": "FRIA", "group": "gov", "level": 2, "risk": 0.6, "details": "Fundamental Rights Impact Assessment." },
+    { "id": "fines", "label": "Sanzioni", "group": "gov", "level": 2, "risk": 0.9, "details": "Multe fino al 7% (AI Act) o 4% (GDPR)." },
+    { "id": "authorities", "label": "Autorità", "group": "gov", "level": 2, "risk": 0.2, "details": "Garante Privacy & AI Office." }
+  ],
+  "links": [
+    { "source": "root", "target": "aiact" }, { "source": "root", "target": "gdpr" }, { "source": "root", "target": "governance" },
+    { "source": "aiact", "target": "prohibited" }, { "source": "prohibited", "target": "ban_social" },
+    { "source": "prohibited", "target": "ban_biometric" }, { "source": "prohibited", "target": "ban_manipulation" },
+    { "source": "aiact", "target": "high_risk" }, { "source": "high_risk", "target": "hr_infra" },
+    { "source": "high_risk", "target": "hr_employment" }, { "source": "high_risk", "target": "hr_justice" },
+    { "source": "high_risk", "target": "ce_marking" }, { "source": "aiact", "target": "gpai" },
+    { "source": "gpai", "target": "copyright" }, { "source": "aiact", "target": "transparency" },
+    { "source": "transparency", "target": "sandbox" }, { "source": "gdpr", "target": "principles" },
+    { "source": "principles", "target": "minimization" }, { "source": "principles", "target": "privacy_design" },
+    { "source": "principles", "target": "consent" }, { "source": "gdpr", "target": "rights" },
+    { "source": "rights", "target": "access" }, { "source": "rights", "target": "erasure" },
+    { "source": "rights", "target": "art22" }, { "source": "gdpr", "target": "accountability" },
+    { "source": "accountability", "target": "dpia" }, { "source": "accountability", "target": "breach" },
+    { "source": "accountability", "target": "dpo" }, { "source": "governance", "target": "fria" },
+    { "source": "governance", "target": "fines" }, { "source": "governance", "target": "authorities" },
+    { "source": "art22", "target": "high_risk", "type": "correlation" },
+    { "source": "dpia", "target": "fria", "type": "correlation" }
+  ]
+};
+
+// Funzione per mappare il rischio in colore
+function getRiskColor(risk) {
+    if (risk >= 0.8) return '#e74c3c'; // Rosso
+    if (risk >= 0.5) return '#f39c12'; // Arancione
+    if (risk >= 0.3) return '#f1c40f'; // Giallo
+    return '#2ecc71'; // Verde
+}
+
+// Trasformazione dati per Cytoscape
+const elements = [
+    ...jsonData.nodes.map(n => ({
+        data: { ...n, color: getRiskColor(n.risk) }
+    })),
+    ...jsonData.links.map(l => ({
+        data: { source: l.source, target: l.target, type: l.type || 'parent-child' }
+    }))
+];
+
+const cy = cytoscape({
+    container: document.getElementById('cy'),
+    elements: elements,
+    style: [
+        {
+            selector: 'node',
+            style: {
+                'label': 'data(label)',
+                'background-color': 'data(color)',
+                'color': '#2c3e50',
+                'text-valign': 'center',
+                'text-halign': 'bottom',
+                'font-size': '12px',
+                'width': '40px',
+                'height': '40px',
+                'border-width': 2,
+                'border-color': '#fff'
+            }
+        },
+        {
+            selector: 'node[group="core"]',
+            style: { 'width': '60px', 'height': '60px', 'font-weight': 'bold', 'font-size': '14px' }
+        },
+        {
+            selector: 'edge',
+            style: {
+                'width': 2,
+                'line-color': '#ccc',
+                'target-arrow-color': '#ccc',
+                'target-arrow-shape': 'triangle',
+                'curve-style': 'bezier'
+            }
+        },
+        {
+            selector: 'edge[type="correlation"]',
+            style: {
+                'line-style': 'dashed',
+                'line-color': '#3498db',
+                'target-arrow-color': '#3498db'
+            }
+        }
+    ],
+    layout: {
+        name: 'breadthfirst',
+        directed: true,
+        padding: 50,
+        spacingFactor: 1.5
+    }
+});
+
+// Gestione Click per mostrare dettagli
+cy.on('tap', 'node', function(evt){
+    const node = evt.target.data();
+    const panel = document.getElementById('info-panel');
+    const content = document.getElementById('node-content');
+    
+    panel.style.display = 'block';
+    
+    // Costruzione dinamica del pannello (avendo accesso al JSON originale per i testi legali)
+    // Nota: Ho semplificato i dati legali per brevità nel JS, ma puoi estenderli
+    content.innerHTML = `
+        <h2>${node.label}</h2>
+        <div class="risk-badge" style="background:${node.color}">Rischio: ${(node.risk * 100).toFixed(0)}%</div>
+        <p><strong>Descrizione:</strong><br>${node.details}</p>
+        <div class="section-title">RIFERIMENTI LEGALI</div>
+        <p style="font-size: 0.9em; color: #666;">Seleziona un nodo per visualizzare i link ufficiali (disponibili nel JSON originale).</p>
+        <a href="https://eur-lex.europa.eu/" target="_blank" class="legal-link">Cerca su EUR-Lex →</a>
+    `;
+});
+
+// Reset quando si clicca sullo sfondo
+cy.on('tap', function(event){
+    if( event.target === cy ){
+        document.getElementById('info-panel').style.display = 'none';
+    }
+});
+</script>
+</body>
+</html>
